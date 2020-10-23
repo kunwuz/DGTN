@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="6070436a-6861-469d-8ab6-fd5491242741" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="1jE1D627HMEfCzvqi3BNchOnJME" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6070436a-6861-469d-8ab6-fd5491242741" name="Default Changelist" comment="" />
+      <created>1603354313243</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1603354313243</updated>
+      <workItem from="1603354317676" duration="2477000" />
+      <workItem from="1603357893441" duration="152000" />
+      <workItem from="1603359299285" duration="4432000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="-61" y="-892" key="FileChooserDialogImpl" timestamp="1603357169525">
+      <screen x="-364" y="-1080" width="2048" height="864" />
+    </state>
+    <state x="-61" y="-892" key="FileChooserDialogImpl/0.0.1536.824/-364.-1080.2048.864@-364.-1080.2048.864" timestamp="1603357169525" />
+    <state x="-163" y="-915" width="642" height="534" key="find.popup" timestamp="1603384249860">
+      <screen x="-364" y="-1080" width="2048" height="864" />
+    </state>
+    <state x="-163" y="-915" width="642" height="534" key="find.popup/0.0.1536.824/-364.-1080.2048.864@-364.-1080.2048.864" timestamp="1603384249860" />
+  </component>
+</project>
