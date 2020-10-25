@@ -23,7 +23,7 @@ del test_data, train_data
 del unaug_train_data, unaug_test_data
 
 k_num = [20,40,60,100,140, 160, 180, 200]
-k_num = [20] # for testing, should be deleted
+
 for k in k_num:
     knn = KNN(k, all_data, unaug_data, unaug_index)
     all_sess_neigh = knn.get_neigh_sess(0)
