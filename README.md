@@ -1,5 +1,5 @@
 # DGTN: Dual-channel Graph Transition Network for Session-based Recommendation
-This repository contains PyTorch Implementation of ICDMW 2021 paper: [*DGTN: Dual-channel Graph Transition Network for Session-based Recommendation*.](https://arxiv.org/abs/2009.10002)
+This repository contains PyTorch Implementation of ICDMW 2020 paper: [*DGTN: Dual-channel Graph Transition Network for Session-based Recommendation*.](https://arxiv.org/abs/2009.10002)
 Please check our paper for more details about our work if you are interested. 
 
 ## Usage
