@@ -6,15 +6,19 @@ import pickle
 import time
 
 raw_path = '../datasets/raw/cikm16-train-item-views'
+# raw_path = '../datasets/raw/sample-train-item-views'
 save_path = "../neigh_retrieval/unaugment_data"
 
 
 def load_data(file):
     print("Start load_data")
     # load csv
-    data = pd.read_csv(file+'.csv', sep=';', header=0, usecols=[0, 2, 4], dtype={0: np.int32, 1: np.int64, 3: str})
+    # data = pd.read_csv(file+'.csv', sep=';', header=0, usecols=[0, 2, 4], dtype={0: np.int32, 1: np.int64, 3: str})   # 源代码
+    data = pd.read_csv(file + '.csv', sep=';', header=0, usecols=[0, 2, 3, 4],
+                       dtype={0: np.int32, 1: np.int64, 2: str, 3: str})
     # specify header names
-    data.columns = ['SessionId', 'ItemId', 'Eventdate']
+    # data.columns = ['SessionId', 'ItemId', 'Eventdate']       # 源代码
+    data.columns = ['SessionId', 'ItemId', 'Timeframe', 'Eventdate']
     # convert time string to timestamp and remove the original column
     data['Time'] = data.Eventdate.apply(lambda x: datetime.strptime(x, '%Y-%m-%d').timestamp())
     print(data['Time'].min())
@@ -65,7 +69,7 @@ def split_train_test(data):
     session_test = session_max_times[session_max_times >= tmax-7*86400].index
     train = data[np.in1d(data.SessionId, session_train)]
     test = data[np.in1d(data.SessionId, session_test)]
-    test = test[np.in1d(test.ItemId, train.ItemId)]
+    test = test[np.in1d(test.ItemId, train.ItemId)]     # 删除了只出现在测试集而没有出现在训练集的item，以防止冷启动问题
     tslength = test.groupby('SessionId').size()
     test = test[np.in1d(test.SessionId, tslength[tslength >= 2].index)]
 
@@ -78,12 +82,11 @@ def split_train_test(data):
 def get_dict(data):
     print("Start get_dict")
     item2idx = {}
-    pop_scores = data.groupby('ItemId').size().sort_values(ascending=False)
-    pop_scores = pop_scores / pop_scores[:1].values[0]
+    pop_scores = data.groupby('ItemId').size().sort_values(ascending=False)     # 统计每个itemid的个数并降序排序
+    pop_scores = pop_scores / pop_scores[:1].values[0]  # 这里为啥要做归一化？
     items = pop_scores.index
     for idx, item in enumerate(items):
         item2idx[item] = idx+1
-
     return item2idx
 
 
@@ -109,7 +112,8 @@ def get_sequence(data, item2idx, shift=-1):
     sess_ids = sess_ids['SessionId'].unique()
     seqs = []
     for count, sess_id in enumerate(sess_ids):
-        seq = data[data['SessionId'].isin([sess_id])]
+        # seq = data[data['SessionId'].isin([sess_id])]     # 源代码
+        seq = data[data['SessionId'].isin([sess_id])].sort_values(['Timeframe'])    # 修改
         seq = seq['ItemId'].values
         outseq = []
         for i in seq:
@@ -121,7 +125,10 @@ def get_sequence(data, item2idx, shift=-1):
               end='', flush=True)
 
     print("\n")
+    # print(seqs)
     out_seqs, labs = process_seqs(seqs, shift)
+    # print(out_seqs)
+    # print(labs)
     print(len(out_seqs), len(labs))
     return out_seqs, labs
 
@@ -129,13 +136,14 @@ def get_sequence(data, item2idx, shift=-1):
 def preprocess(train, test, path=save_path):
     print("--------------")
     print("Start preprocess cikm16")
+    # print("Start preprocess sample")
     item2idx = get_dict(train)
     train_seqs, train_labs = get_sequence(train, item2idx)
     test_seqs, test_labs = get_sequence(test, item2idx, train_labs[-1])
     train = (train_seqs, train_labs)
     test = (test_seqs, test_labs)
-
     path = path + '/cikm16'
+    # path = path + '/sample'
     if not os.path.exists(path):
         os.makedirs(path)
 
